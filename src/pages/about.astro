@@ -1,0 +1,99 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const timeline = [
+  { year: '2023 — hoy', role: 'Python Developer (GenAI)', company: 'PI Data Strategy' },
+  { year: '2023 — 2025', role: 'Jefe de Cátedra', company: 'UTN FRC' },
+  { year: '2022 — 2024', role: 'Python Developer', company: 'Sardonyx SAS' },
+  { year: '2021 — 2022', role: 'SR QA Engineer', company: 'Osana Salud' },
+  { year: '2017 — 2025', role: 'Docente Investigadora', company: 'CINTRA · UTN FRC' },
+  { year: '2015 — 2023', role: 'Docente (Adjunta / JTP)', company: 'UTN FRC' },
+  { year: '2016 — 2020', role: 'Ingeniera en Automatismo', company: 'IPROIN SAS' },
+  { year: '2013 — 2014', role: 'Software Developer', company: 'Clariphy' },
+];
+
+---
+
+<BaseLayout title="About — Ing. Ana M Moreno" description="Ingeniera Electrónica especializada en backend con Python, soluciones cloud e IA aplicada.">
+  <!-- Two-column: bio izquierda, foto derecha -->
+  <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 items-start mb-16">
+
+    <!-- Columna izquierda: bio -->
+    <div class="space-y-5">
+      <h1 class="font-mono text-3xl font-bold text-text">
+        Hola, soy Ana Moreno
+      </h1>
+
+      <p class="text-muted leading-relaxed">
+        Soy Ingeniera Electrónica especializada en desarrollo backend con Python.
+      </p>
+
+      <p class="text-muted leading-relaxed">
+        Diseño e implemento soluciones productivas en la nube — participando end-to-end
+        en diseño técnico, despliegues, escalado y observabilidad. Desarrollo soluciones
+        de IA aplicada que resuelven problemas reales: desde agentes inteligentes hasta
+        búsqueda semántica integrada a sistemas en producción.
+      </p>
+
+      <p class="text-muted leading-relaxed">
+        Experiencia como referente técnico frente al cliente: traduzco requerimientos
+        en soluciones y coordino entregas del equipo.
+      </p>
+
+      <p class="text-muted leading-relaxed">
+        Lo que me define: aprendizaje continuo, criterio técnico propio y orientación al resultado.
+      </p>
+
+      <p class="font-mono text-sm text-accent pt-1">
+        Python · FastAPI · Azure OpenAI · LangGraph · SQL / NoSQL
+      </p>
+
+      {/* Email — oculto temporalmente
+      <a
+        href="mailto:anamariamoreno88@gmail.com"
+        class="group inline-flex items-center gap-3 mt-4 px-4 py-2.5 rounded-lg border border-border bg-surface hover:border-accent transition-colors w-fit"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted group-hover:text-accent transition-colors shrink-0">
+          <rect width="20" height="16" x="2" y="4" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        <span class="font-mono text-sm text-muted group-hover:text-accent transition-colors">
+          anamariamoreno88@gmail.com
+        </span>
+      </a>
+      */}
+    </div>
+
+    <!-- Columna derecha: foto -->
+    <div class="mx-auto md:mx-0">
+      <div class="w-48 h-48 md:w-56 md:h-56 rotate-3 rounded-2xl overflow-hidden border border-border bg-surface">
+        <!-- Reemplazar /foto.jpg por tu foto real en public/ -->
+        <img
+          src="/tu-foto.png"
+          alt="Ing. Ana M Moreno"
+          class="w-full h-full object-cover"
+          width="224"
+          height="224"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline de experiencia — oculto temporalmente -->
+  {/* <div>
+    <h2 class="font-mono text-xs text-muted uppercase tracking-widest mb-8 pb-4 border-b border-border">
+      Experiencia
+    </h2>
+    <div class="space-y-6">
+      {timeline.map(({ year, role, company }) => (
+        <div class="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-1 md:gap-6 text-sm">
+          <span class="font-mono text-muted text-xs">{year}</span>
+          <span class="text-text">
+            {role}
+            <span class="text-muted"> @ {company}</span>
+          </span>
+        </div>
+      ))}
+    </div>
+  </div> */}
+</BaseLayout>

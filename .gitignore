@@ -1,0 +1,20 @@
+# Dependencias
+node_modules/
+
+# Build output (GitHub Actions lo genera en el deploy)
+dist/
+
+# Generado por Astro
+.astro/
+
+# Archivos privados de Claude
+CLAUDE.local.md
+.claude/
+
+# Documentación interna del proyecto
+docs/
+
+# Variables de entorno (por si se agregan en el futuro)
+.env
+.env.*
+!.env.example

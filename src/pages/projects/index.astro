@@ -1,0 +1,53 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => {
+  // Active projects first, then coming-soon
+  if (a.data.status === b.data.status) return 0;
+  return a.data.status === 'active' ? -1 : 1;
+});
+
+const categories = ['backend', 'llm', 'data-analysis', 'ml'] as const;
+---
+
+<BaseLayout title="Projects — Ing. Ana M Moreno" description="Proyectos de backend, LLMs y análisis de datos.">
+  <div class="mb-10">
+    <h1 class="font-mono text-3xl font-bold text-text mb-2">Projects</h1>
+    <p class="text-muted">Lo que construyo.</p>
+  </div>
+
+  {projects.length > 0 ? (
+    <div class="grid gap-3 sm:grid-cols-2">
+      {projects.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.body}
+          stack={project.data.stack}
+          github={project.data.github}
+          demo={project.data.demo}
+          status={project.data.status}
+        />
+      ))}
+    </div>
+  ) : (
+    <div class="grid gap-3 sm:grid-cols-2">
+      <ProjectCard
+        title="Backend API"
+        description=""
+        stack={['Python', 'FastAPI', 'PostgreSQL']}
+        status="coming-soon"
+        comingSoonLabel="API REST con FastAPI, autenticación JWT y documentación automática. En construcción."
+      />
+      <ProjectCard
+        title="LLM Agent"
+        description=""
+        stack={['LangChain', 'OpenAI API', 'FastAPI']}
+        status="coming-soon"
+        comingSoonLabel="Agente conversacional con RAG sobre documentos propios. En construcción."
+      />
+    </div>
+  )}
+</BaseLayout>

@@ -1,0 +1,76 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  stack: string[];
+  github?: string;
+  demo?: string;
+  status?: 'active' | 'coming-soon';
+  comingSoonLabel?: string;
+}
+
+const {
+  title,
+  description,
+  stack,
+  github,
+  demo,
+  status = 'active',
+  comingSoonLabel,
+} = Astro.props;
+
+const isComingSoon = status === 'coming-soon';
+---
+
+<div
+  class:list={[
+    'p-5 rounded-lg border bg-surface flex flex-col gap-3',
+    isComingSoon ? 'border-border opacity-60' : 'border-border hover:border-accent transition-colors',
+  ]}
+>
+  <div class="flex items-start justify-between gap-2">
+    <h2 class="font-mono text-base font-semibold text-text">{title}</h2>
+    {isComingSoon && (
+      <span class="text-xs font-mono px-2 py-0.5 rounded border border-border text-muted whitespace-nowrap">
+        Próximamente
+      </span>
+    )}
+  </div>
+
+  <p class="text-sm text-muted flex-1">
+    {isComingSoon && comingSoonLabel ? comingSoonLabel : description}
+  </p>
+
+  <div class="flex gap-2 flex-wrap">
+    {stack.map((tech) => (
+      <span class="text-xs font-mono px-2 py-0.5 rounded bg-bg border border-border text-muted">
+        {tech}
+      </span>
+    ))}
+  </div>
+
+  {!isComingSoon && (github || demo) && (
+    <div class="flex gap-3 pt-1">
+      {github && (
+        <a
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs text-muted hover:text-accent transition-colors font-mono"
+        >
+          GitHub →
+        </a>
+      )}
+      {demo && (
+        <a
+          href={demo}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs text-muted hover:text-accent transition-colors font-mono"
+        >
+          Demo →
+        </a>
+      )}
+    </div>
+  )}
+</div>

@@ -1,0 +1,60 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Blog — Ing. Ana M Moreno" description="Posts sobre backend, LLMs y desarrollo de software.">
+  <div class="mb-10 pb-6 border-b border-border">
+    <h1 class="font-mono text-3xl font-bold text-text mb-2">Blog</h1>
+    <p class="text-muted">Todo lo que aprendo, documentado.</p>
+  </div>
+
+  {posts.length > 0 ? (
+    <div class="flex flex-col">
+      {posts.map((post) => {
+        const formattedDate = post.data.date.toLocaleDateString('es-AR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+        return (
+          <a
+            href={`/blog/${post.slug}`}
+            class="group relative -mx-4 px-4 py-6 rounded-lg hover:bg-surface transition-colors"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_160px] gap-2 md:gap-8 items-start">
+              <!-- Contenido -->
+              <div>
+                <div class="flex gap-2 mb-2 flex-wrap">
+                  {post.data.tags.slice(0, 3).map((tag: string) => (
+                    <span class="text-xs font-mono text-muted">#{tag}</span>
+                  ))}
+                </div>
+                <h2 class="font-mono text-base font-semibold text-text group-hover:text-accent transition-colors mb-1">
+                  {post.data.title}
+                </h2>
+                <p class="text-sm text-muted line-clamp-2 mb-3">{post.data.description}</p>
+                <span class="text-xs font-mono text-accent">Leer artículo →</span>
+              </div>
+
+              <!-- Fecha (derecha en desktop) -->
+              <div class="hidden md:block text-right">
+                <time class="text-xs font-mono text-muted">{formattedDate}</time>
+              </div>
+            </div>
+
+            <!-- Fecha visible en mobile (arriba del título) -->
+            <time class="md:hidden text-xs font-mono text-muted absolute top-6 right-4">
+              {post.data.date.toLocaleDateString('es-AR', { year: 'numeric', month: 'short' })}
+            </time>
+          </a>
+        );
+      })}
+    </div>
+  ) : (
+    <p class="text-muted font-mono text-sm py-8">Primer post en camino...</p>
+  )}
+</BaseLayout>
